@@ -2,7 +2,7 @@
 require 'test_helper'
 
 class QRCodeTest < Minitest::Test
-  require_relative "data"
+  require "data"
 
   def test_no_data_given
     assert_raises(RQRCode::QRCodeArgumentError) {
@@ -106,7 +106,7 @@ class QRCodeTest < Minitest::Test
   def test_numeric_2_M
     data = '279042272585972554922067893753871413584876543211601021503002'
 
-    qr = RQRCode::QRCode.new(data, size: 2, level: :m, mode: :number)
+    qr = RQRCode::QRCode.new(data, :size => 2, :level => :m, :mode => :number)
     assert_equal "xxxxxxx   x x x   xxxxxxx\n", qr.to_s[0..25]
   end
 
@@ -124,14 +124,14 @@ class QRCodeTest < Minitest::Test
 
   def test_error_correction_level
     # attr_reader was wrong
-    assert_equal RQRCode::QRCode.new('a', level: :h).error_correction_level, :h
+    assert_equal RQRCode::QRCode.new('a', :level => :h).error_correction_level, :h
   end
 
   def test_version_table
     # tables in RQRCode::QRCode::QRMAXDIGITS wasn't updated to support greater versions
-    assert_equal RQRCode::QRCode.new('1' * 289, level: :h, mode: :number).version, 11
-    assert_equal RQRCode::QRCode.new('A' * 175, level: :h, mode: :alphanumeric).version, 11
-    assert_equal RQRCode::QRCode.new('a' * 383, level: :h, mode: :byte_8bit).version, 21
+    assert_equal RQRCode::QRCode.new('1' * 289, :level => :h, :mode => :number).version, 11
+    assert_equal RQRCode::QRCode.new('A' * 175, :level => :h, :mode => :alphanumeric).version, 11
+    assert_equal RQRCode::QRCode.new('a' * 383, :level => :h, :mode => :byte_8bit).version, 21
   end
 
   def test_levels

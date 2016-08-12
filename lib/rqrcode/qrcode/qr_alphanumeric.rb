@@ -32,10 +32,10 @@ module RQRCode
       (@data.size).times do |i|
         if i % 2 == 0
           if i == (@data.size - 1)
-            value = ALPHANUMERIC.index(@data[i])
+            value = ALPHANUMERIC.index(@data[i].chr)
             buffer.put( value, 6 )
           else
-            value = (ALPHANUMERIC.index(@data[i]) * 45) + ALPHANUMERIC.index(@data[i+1])
+            value = (ALPHANUMERIC.index(@data[i].chr) * 45) + ALPHANUMERIC.index(@data[i+1].chr)
             buffer.put( value, 11 )
           end
         end
